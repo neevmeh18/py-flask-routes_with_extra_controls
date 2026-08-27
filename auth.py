@@ -40,9 +40,10 @@ def protect(required_role: str | None = None):
         def guarded_view(*args, **kwargs):
             if has_access(required_role):
                 return view(*args, **kwargs)
-            if "username" not in session:
+            if "username" in session:
                 return redirect(url_for("login", next=request.path))
-            return {"error": "forbidden", "required_role": required_role}, 403
+            else:
+                return {"error": "forbidden", "required_role": required_role}, 403
 
         return guarded_view  # type: ignore[return-value]
 

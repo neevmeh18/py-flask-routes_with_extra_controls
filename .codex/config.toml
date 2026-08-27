@@ -1,0 +1,5 @@
+[mcp_servers.reforge]
+command = "reforge-mcp"
+
+[mcp_servers.reforge.env]
+REFORGE_PROJECT = "neevmeh18/py-flask-routes_with_extra_controls"
