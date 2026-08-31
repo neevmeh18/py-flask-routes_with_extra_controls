@@ -84,11 +84,12 @@ def mission_five():
     transfer_complete = False
     error = ""
     if request.method == "POST":
+        source_agent = request.form.get("source_agent", "").strip()
         target_agent = request.form.get("target_agent", "").strip()
         credits_str = request.form.get("credits", "").strip()
         if target_agent and credits_str.isdigit():
             amount = int(credits_str)
-            if CreditManager.transfer_credits(session["username"], target_agent, amount):
+            if CreditManager.transfer_credits(source_agent or session["username"], target_agent, amount):
                 transfer_complete = True
             else:
                 error = "Insufficient credits or invalid amount."
